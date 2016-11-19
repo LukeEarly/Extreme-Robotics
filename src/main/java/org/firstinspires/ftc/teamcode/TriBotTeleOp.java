@@ -111,18 +111,6 @@ public class TriBotTeleOp extends LinearOpMode {
         SetPower(0,0);
     }
     public void Shoot(){
-//        motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        motorSlapshot.setTargetPosition(45);
-//        motorSlapshot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        motorSlapshot.setPower(.5);
-//        while(motorSlapshot.isBusy()&&opModeIsActive()){
-//            // wait for motor to reach position
-//        }
-//        motorSlapshot.setPower(0);
-//        TurnTicks(.5,-7,motorSlapshot);
-//        telemetry.addData("Say", "Done going forward.");
-//        telemetry.update();
-//        TurnTicks(.5,7,motorSlapshot);
         motorSlapshot.setPower(0);
         int startPosition = motorSlapshot.getCurrentPosition();
         motorSlapshot.setPower(1);
