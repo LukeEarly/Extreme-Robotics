@@ -41,7 +41,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
- * This OpMode uses the common Pushbot hardware class to define the devices on the 
+ * This OpMode uses the common Pushbot hardware class to define the devices on the
  * All device access is managed through the HardwarePushbot class.
  * The code is structured as a LinearOpMode
 
@@ -70,6 +70,7 @@ public class TriBotTeleOp extends LinearOpMode {
         motorSlapshot = hardwareMap.dcMotor.get("motorSlapshot");
         motorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorSlapshot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         telemetry.addData("Say", "I'm waiting for you to PRESS THE BIG TRIANGLE!!!");
         telemetry.update();
@@ -95,23 +96,39 @@ public class TriBotTeleOp extends LinearOpMode {
         motor.setTargetPosition(distance);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motor.setPower(power);
-        while(motor.isBusy()){
+        while(motor.isBusy()&&opModeIsActive()){
             // wait for motor to reach position
         }
-        StopDriving();
-        motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motor.setPower(0);
+        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
     public void SetPower(double left, double right){
         motorLeft.setPower(left);
         motorRight.setPower(right);
+
     }
     public void StopDriving(){
         SetPower(0,0);
     }
     public void Shoot(){
-        TurnTicks(1,-1,motorSlapshot);
-        telemetry.addData("Say", "Done going forward.");
-        telemetry.update();
-        TurnTicks(1,1,motorSlapshot);
+//        motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        motorSlapshot.setTargetPosition(45);
+//        motorSlapshot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        motorSlapshot.setPower(.5);
+//        while(motorSlapshot.isBusy()&&opModeIsActive()){
+//            // wait for motor to reach position
+//        }
+//        motorSlapshot.setPower(0);
+//        TurnTicks(.5,-7,motorSlapshot);
+//        telemetry.addData("Say", "Done going forward.");
+//        telemetry.update();
+//        TurnTicks(.5,7,motorSlapshot);
+        motorSlapshot.setPower(0);
+        int startPosition = motorSlapshot.getCurrentPosition();
+        motorSlapshot.setPower(1);
+        while(motorSlapshot.getCurrentPosition()<startPosition-140){
+            // Waiting...
+        }
+        motorSlapshot.setPower(0);
     }
 }
