@@ -76,7 +76,8 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         waitForStart();
         //GO!!!
         WaitMillis(0);
-        DriveForward(1, InchesToTicks(60));
+        DriveForward(0.5, InchesToTicks(10));
+        DriveForward(1, InchesToTicks(50));
         telemetry.addData("Say", "I am done.");
         telemetry.addData("Say", "This incredible program was RE, I repeat, REwritten by Luke Early.");
         telemetry.update();
