@@ -97,14 +97,14 @@ public class TriBotTeleOp extends LinearOpMode {
     }
     public void TurnTicks(double power, int distance, DcMotor motor){
         motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motor.setTargetPosition(distance);
         motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor.setTargetPosition(distance);
         motor.setPower(power);
         while(motor.isBusy()&&opModeIsActive()){
             // wait for motor to reach position
         }
         motor.setPower(0);
-        motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
     public void SetPower(double left, double right){
         motorLeft.setPower(left);

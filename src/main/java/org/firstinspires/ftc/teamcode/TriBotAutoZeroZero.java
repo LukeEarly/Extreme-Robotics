@@ -35,7 +35,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 
 
 /**
@@ -52,14 +51,11 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Encoder_Test")
+@Autonomous(name="TriBotAuto00")
 
-public class Encoder_Test extends LinearOpMode {
-       /* Declare OpMode members. */
+public class TriBotAutoZeroZero extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
-    //Servo armServo;
-    //double motorRpm = 0;
     double motorRevTicks = 1440;
     double gearRatio = 0.5;
     double wheelDiameterIn = 12.56637061459172;
@@ -67,9 +63,6 @@ public class Encoder_Test extends LinearOpMode {
     double wheelRevTicks = motorRevTicks/gearRatio;
     double ticksPerInch = 229.18311804808813395;
     double ticksPerCm = 90.22957403468036431;
-    //double wheelRpm = 0;
-    //long inchesPerMinute = 0;
-    //long inchesPerMillis = inchesPerMinute/60000;
     double drivePower = 1;
     @Override public void runOpMode() {
         motorLeft = hardwareMap.dcMotor.get("motorLeft");
@@ -78,33 +71,16 @@ public class Encoder_Test extends LinearOpMode {
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // motorLeft.setDirection(DcMotor.Direction.REVERSE);
-        // motorRight.setDirection(DcMotor.Direction.REVERSE);
+//        motorLeft.setDirection(DcMotor.Direction.REVERSE);
+        motorRight.setDirection(DcMotor.Direction.REVERSE);
 
-        /** Servo Initialization EXAMPLE:
-         * armServo = hardwareMap.servo.get("armServo");
-         * armServo.setPosition(.8);
-         */
         waitForStart();
         //GO!!!
-        telemetry.addData("Say", "15 seconds to mark location.");
-        WaitMillis(15000);
-        // 1 rotation forward
-        DriveForward(1,1440);
-        telemetry.addData("Say", "15 seconds to mark location.");
-        WaitMillis(15000);
-        // 1 rotation back
-        DriveBackwards(1,1440);
-        telemetry.addData("Say", "15 seconds to mark location.");
-        WaitMillis(15000);
-        // 5 in forward
-        DriveForward(1,InchesToTicks(5));
-        telemetry.addData("Say", "15 seconds to mark location.");
-        WaitMillis(15000);
-        //5 in back
-        DriveBackwards(1,InchesToTicks(5));
-        telemetry.addData("Say", "Mark location.");
+        DriveForward(1, InchesToTicks(60));
         telemetry.addData("Say", "I am done.");
+        telemetry.addData("Say", "This incredible program was RE, I repeat, REwritten by Luke Early.");
+        telemetry.update();
+
     }
 
 
@@ -119,17 +95,17 @@ public class Encoder_Test extends LinearOpMode {
     public void DriveForward(double power, int distance){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLeft.setTargetPosition(distance);
-        motorRight.setTargetPosition(distance);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLeft.setTargetPosition(distance);
+        motorRight.setTargetPosition(distance);
         SetPower(power,power);
-        while(motorLeft.isBusy() && motorRight.isBusy()){
+        while(opModeIsActive()&&motorLeft.isBusy() && motorRight.isBusy()){
             // wait for motor to reach position
         }
-        StopDriving(0);
-        motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        StopDriving();
+        motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
     public void DriveBackwards(double power, int distance){
         DriveForward(-power,-distance);
@@ -142,10 +118,10 @@ public class Encoder_Test extends LinearOpMode {
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         SetPower(power,-power);
-        while(motorLeft.isBusy() && motorRight.isBusy()){
+        while(opModeIsActive()&& motorLeft.isBusy() && motorRight.isBusy()){
             // wait for motor to reach position
         }
-        StopDriving(0);
+        StopDriving();
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
@@ -154,45 +130,54 @@ public class Encoder_Test extends LinearOpMode {
     }
     public void PivotRight(double power, int distance){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLeft.setTargetPosition(distance);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        SetPower(power,-power);
-        while(motorLeft.isBusy()){
+        motorLeft.setTargetPosition(distance);
+        motorLeft.setPower(1);
+        while(opModeIsActive()&&motorLeft.isBusy()){
             // wait for motor to reach position
         }
-        StopDriving(0);
+        motorLeft.setPower(0);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void PivotLeft(double power, int distance){
-        PivotRight(-power,-distance);
+        motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorRight.setTargetPosition(distance);
+        motorRight.setPower(1);
+        while(opModeIsActive()&&motorRight.isBusy()){
+            // wait for motor to reach position
+        }
+        motorRight.setPower(0);
+        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
     public void SetPower(double left, double right){
         motorLeft.setPower(left);
         motorRight.setPower(right);
     }
-    public void StopDriving(long millis){
+    public void StopDriving(){
         SetPower(0,0);
-        WaitMillis(millis);
     }
     public void SetPowerEncoder(double leftPower, double rightPower, int leftTarget, int rightTarget){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorLeft.setTargetPosition(leftTarget);
-        motorRight.setTargetPosition(rightTarget);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorLeft.setTargetPosition(leftTarget);
+        motorRight.setTargetPosition(rightTarget);
         SetPower(leftPower,rightPower);
-        while(motorLeft.isBusy() || motorRight.isBusy()){
+        while(opModeIsActive()&&(motorLeft.isBusy() || motorRight.isBusy())){
             if (!motorLeft.isBusy()){
                 motorLeft.setPower(0);
+                motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
             if (!motorRight.isBusy()){
                 motorRight.setPower(0);
+                motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
         }
-        StopDriving(0);
-        motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        StopDriving();
+        motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
     public int InchesToTicks(double inches){
         int ticks = (int) Math.round(inches*ticksPerInch);

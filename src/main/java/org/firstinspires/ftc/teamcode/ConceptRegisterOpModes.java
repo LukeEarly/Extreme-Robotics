@@ -107,5 +107,6 @@ public class ConceptRegisterOpModes
        manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
        manager.register("Encoder_Test",           Encoder_Test.class);
        manager.register("TriBotTeleOp",           TriBotTeleOp.class);
+       manager.register("TriBotAuto00",             TriBotAutoZeroZero.class);
   }
 }
