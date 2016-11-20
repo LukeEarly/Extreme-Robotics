@@ -14,6 +14,7 @@ public class TriBotTeleOp extends LinearOpMode {
     DcMotor motorRight;
     DcMotor motorSlapshot;
     boolean shot = false;
+    double slapshotInput;
     @Override
     public void runOpMode() {
         double left;
@@ -33,19 +34,18 @@ public class TriBotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
             left  = -gamepad1.left_stick_y + gamepad1.right_stick_x;
             right = -gamepad1.left_stick_y - gamepad1.right_stick_x;
+            slapshotInput = (-gamepad2.left_stick_y+1)*45;
             max = Math.max(Math.abs(left), Math.abs(right));
             if (max > 1.0) {
                 left /= max;
                 right /= max;
             }
-            if (gamepad2.right_bumper) {
-                Shoot();
-            }
-            if (gamepad2.left_bumper) {
-                Retract();
+            if(Math.abs(slapshotInput) > 1.0) {
+                slapshotInput /= Math.abs(slapshotInput);
             }
             motorLeft.setPower(left);
             motorRight.setPower(right);
+            motorSlapshot.setPower(slapshotInput-motorSlapshot.getCurrentPosition());
             idle();
         }
     }
@@ -63,27 +63,8 @@ public class TriBotTeleOp extends LinearOpMode {
     public void SetPower(double left, double right){
         motorLeft.setPower(left);
         motorRight.setPower(right);
-
     }
     public void StopDriving(){
         SetPower(0,0);
-    }
-    public void Shoot(){
-        motorSlapshot.setPower(0);
-        int startPosition = motorSlapshot.getCurrentPosition();
-        motorSlapshot.setPower(-1);
-        while (motorSlapshot.getCurrentPosition() > startPosition + 280) {
-            // Waiting...
-        }
-        motorSlapshot.setPower(0);
-    }
-    public void Retract(){
-        motorSlapshot.setPower(0);
-        int startPosition = motorSlapshot.getCurrentPosition();
-        motorSlapshot.setPower(1);
-        while(motorSlapshot.getCurrentPosition()<startPosition-280){
-            // Waiting...
-        }
-        motorSlapshot.setPower(0);
     }
 }
