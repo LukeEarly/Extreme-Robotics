@@ -76,11 +76,11 @@ public class TriBotAutoZeroten extends LinearOpMode {
 
         waitForStart();
         //GO
-        wait(10000);
+        WaitMillis(10000);
         //waiting 10 seconds
         DriveForward(1, InchesToTicks(60));
         telemetry.addData("Say", "I am done.");
-        telemetry.addData("Say", "This incredible program");]
+        telemetry.addData("Say", "This incredible program");
         telemetry.addData("Say", "Joe is the Best");
         telemetry.update();
 
@@ -126,8 +126,8 @@ public class TriBotAutoZeroten extends LinearOpMode {
         }
         StopDriving();
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
-    }
+        motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }*/
    /* public void TankLeft(double power, int distance){
         TankRight(-power,-distance);
     }
