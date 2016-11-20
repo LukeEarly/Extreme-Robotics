@@ -55,12 +55,11 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="TriBotTeleOp")
-@Disabled
 public class TriBotTeleOp extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor motorSlapshot;
-    boolean shot = false;
+   // boolean shot = false;
     @Override
     public void runOpMode() {
         double left;
@@ -72,7 +71,8 @@ public class TriBotTeleOp extends LinearOpMode {
         motorLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorSlapshot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorSlapshot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorRight.setDirection(DcMotor.Direction.REVERSE);
         telemetry.addData("Say", "I'm waiting for you to PRESS THE BIG TRIANGLE!!!");
         telemetry.update();
         waitForStart();
@@ -116,10 +116,12 @@ public class TriBotTeleOp extends LinearOpMode {
     }
     public void Shoot(){
       //  if(!shot){
+            motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motorSlapshot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSlapshot.setPower(0);
             int startPosition = motorSlapshot.getCurrentPosition();
             motorSlapshot.setPower(1);
-            while (motorSlapshot.getCurrentPosition()>startPosition-140) {
+            while(opModeIsActive()&&motorSlapshot.getCurrentPosition()>-140) {
                 // Waiting...
             }
             motorSlapshot.setPower(0);
@@ -128,10 +130,12 @@ public class TriBotTeleOp extends LinearOpMode {
     }
     public void Retract(){
      //   if(shot){
+            motorSlapshot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motorSlapshot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             motorSlapshot.setPower(0);
             int startPosition = motorSlapshot.getCurrentPosition();
             motorSlapshot.setPower(-1);
-            while(motorSlapshot.getCurrentPosition()<startPosition+140){
+            while(opModeIsActive()&&motorSlapshot.getCurrentPosition()<140){
                 // Waiting...
             }
             motorSlapshot.setPower(0);
