@@ -78,7 +78,7 @@ public class TriBotAutoZeroten extends LinearOpMode {
         //GO
         WaitMillis(10000);
         //waiting 10 seconds
-        DriveForward(1, InchesToTicks(60));
+        DriveForward(0.75, InchesToTicks(60));
         telemetry.addData("Say", "I am done.");
         telemetry.addData("Say", "This incredible program");
         telemetry.addData("Say", "Joe is the Best");

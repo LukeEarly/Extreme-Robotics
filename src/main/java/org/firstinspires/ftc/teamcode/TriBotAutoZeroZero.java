@@ -69,6 +69,7 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         motorRight = hardwareMap.dcMotor.get("motorRight");
 
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         motorRight.setDirection(DcMotor.Direction.REVERSE);
@@ -76,12 +77,10 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         waitForStart();
         //GO!!!
         WaitMillis(0);
-        DriveForward(0.5, InchesToTicks(10));
-        DriveForward(1, InchesToTicks(50));
+        DriveForward(0.75, InchesToTicks(60));
         telemetry.addData("Say", "I am done.");
         telemetry.addData("Say", "This incredible program was RE, I repeat, REwritten by Luke Early.");
         telemetry.update();
-
     }
 
 
