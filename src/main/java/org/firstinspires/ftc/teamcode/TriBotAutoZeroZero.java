@@ -71,7 +71,6 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-//        motorLeft.setDirection(DcMotor.Direction.REVERSE);
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
