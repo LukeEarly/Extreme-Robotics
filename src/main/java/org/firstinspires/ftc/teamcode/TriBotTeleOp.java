@@ -8,7 +8,7 @@ are permitted (subject to the limitations in the disclaimer below) provided that
 the following conditions are met:
 
 Redistributions of source code must retain the above copyright notice, this list
-of conditions and the following disclaimer.
+    of conditions and the following disclaimer.
 
 Redistributions in binary form must reproduce the above copyright notice, this
 list of conditions and the following disclaimer in the documentation and/or
@@ -60,6 +60,7 @@ public class TriBotTeleOp extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor motorSlapshot;
+    boolean shot = false;
     @Override
     public void runOpMode() {
         double left;
@@ -83,8 +84,11 @@ public class TriBotTeleOp extends LinearOpMode {
                 left /= max;
                 right /= max;
             }
-            if (gamepad1.right_bumper) {
+            if (gamepad2.right_bumper) {
                 Shoot();
+            }
+            if (gamepad2.left_bumper) {
+                Retract();
             }
             motorLeft.setPower(left);
             motorRight.setPower(right);
@@ -111,12 +115,27 @@ public class TriBotTeleOp extends LinearOpMode {
         SetPower(0,0);
     }
     public void Shoot(){
-        motorSlapshot.setPower(0);
-        int startPosition = motorSlapshot.getCurrentPosition();
-        motorSlapshot.setPower(1);
-        while(motorSlapshot.getCurrentPosition()<startPosition-140){
-            // Waiting...
-        }
-        motorSlapshot.setPower(0);
+      //  if(!shot){
+            motorSlapshot.setPower(0);
+            int startPosition = motorSlapshot.getCurrentPosition();
+            motorSlapshot.setPower(1);
+            while (motorSlapshot.getCurrentPosition()>startPosition-140) {
+                // Waiting...
+            }
+            motorSlapshot.setPower(0);
+     //       shot = true;
+   //     }
+    }
+    public void Retract(){
+     //   if(shot){
+            motorSlapshot.setPower(0);
+            int startPosition = motorSlapshot.getCurrentPosition();
+            motorSlapshot.setPower(-1);
+            while(motorSlapshot.getCurrentPosition()<startPosition+140){
+                // Waiting...
+            }
+            motorSlapshot.setPower(0);
+     //       shot = false;
+    //    }
     }
 }
