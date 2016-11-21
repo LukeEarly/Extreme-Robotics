@@ -110,6 +110,6 @@ public class ConceptRegisterOpModes
        manager.register("TriBotTeleOp",           TriBotTeleOp.class);
     // TriBotAuto
        manager.register("TriBotAuto00",           TriBotAutoZeroZero.class);
-       manager.register("TriBotAuto010",          TriBotAutoZeroten.class);
+       manager.register("TriBotAuto06",          TriBotAutoZeroten.class);
   }
 }

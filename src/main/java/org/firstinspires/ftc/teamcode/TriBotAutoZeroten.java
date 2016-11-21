@@ -51,7 +51,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="TriBotAuto010")
+@Autonomous(name="TriBotAuto06")
 
 public class TriBotAutoZeroten extends LinearOpMode {
     DcMotor motorLeft;
