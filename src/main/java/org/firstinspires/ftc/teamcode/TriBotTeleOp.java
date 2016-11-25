@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+
+
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 @TeleOp(name="TriBotTeleOp")
@@ -14,7 +16,6 @@ public class TriBotTeleOp extends LinearOpMode {
     DcMotor motorRight;
     DcMotor motorSlapshot;
     boolean shot = false;
-    double slapshotInput;
     @Override
     public void runOpMode() {
         double left;
@@ -34,18 +35,37 @@ public class TriBotTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
             left  = -gamepad1.left_stick_y + gamepad1.right_stick_x;
             right = -gamepad1.left_stick_y - gamepad1.right_stick_x;
-            slapshotInput = (-gamepad2.left_stick_y+1)*45;
             max = Math.max(Math.abs(left), Math.abs(right));
             if (max > 1.0) {
                 left /= max;
                 right /= max;
             }
-            if(Math.abs(slapshotInput) > 1.0) {
-                slapshotInput /= Math.abs(slapshotInput);
-            }
+            if (gamepad2.right_bumper) {
+                motorSlapshot.setPower(0);
+                int startPosition = motorSlapshot.getCurrentPosition();
+                telemetry.addData("Start P", startPosition);
+                telemetry.update();
+                motorSlapshot.setPower(-1);
+                while (motorSlapshot.getCurrentPosition() > startPosition + 280) {
+                    // Waiting...
+                    telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
+                    telemetry.update();
+                }
+                motorSlapshot.setPower(0);            }
+            if (gamepad2.left_bumper) {
+                motorSlapshot.setPower(0);
+                int startPositionr = motorSlapshot.getCurrentPosition();
+                telemetry.addData("Start P", startPositionr);
+                telemetry.update();
+                motorSlapshot.setPower(1);
+                while(motorSlapshot.getCurrentPosition()<startPositionr-280){
+                    // Waiting...
+                    telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
+                    telemetry.update();
+                }
+                motorSlapshot.setPower(0);            }
             motorLeft.setPower(left);
             motorRight.setPower(right);
-            motorSlapshot.setPower(slapshotInput-motorSlapshot.getCurrentPosition());
             idle();
         }
     }
@@ -66,5 +86,31 @@ public class TriBotTeleOp extends LinearOpMode {
     }
     public void StopDriving(){
         SetPower(0,0);
+    }
+    public void Shoot(){
+        motorSlapshot.setPower(0);
+        int startPosition = motorSlapshot.getCurrentPosition();
+        telemetry.addData("Start P", startPosition);
+        telemetry.update();
+        motorSlapshot.setPower(-1);
+        while (motorSlapshot.getCurrentPosition() > startPosition + 280) {
+            // Waiting...
+            telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
+            telemetry.update();
+        }
+        motorSlapshot.setPower(0);
+    }
+    public void Retract(){
+        motorSlapshot.setPower(0);
+        int startPosition = motorSlapshot.getCurrentPosition();
+        telemetry.addData("Start P", startPosition);
+        telemetry.update();
+        motorSlapshot.setPower(1);
+        while(motorSlapshot.getCurrentPosition()<startPosition-280){
+            // Waiting...
+            telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
+            telemetry.update();
+        }
+        motorSlapshot.setPower(0);
     }
 }
