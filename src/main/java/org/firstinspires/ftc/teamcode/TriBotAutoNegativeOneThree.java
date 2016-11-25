@@ -36,9 +36,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="TriBotAuto06")
+@Autonomous(name="TriBotAuto-13")
 
-public class TriBotAutoZeroten extends LinearOpMode {
+public class TriBotAutoNegativeOneThree extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     double motorRevTicks = 1440;
@@ -48,27 +48,28 @@ public class TriBotAutoZeroten extends LinearOpMode {
     double wheelRevTicks = motorRevTicks/gearRatio;
     double ticksPerInch = 229.18311804808813395;
     double ticksPerCm = 90.22957403468036431;
+    double ticksPerDegrees = 0;
     double drivePower = 1;
     @Override public void runOpMode() {
         motorLeft = hardwareMap.dcMotor.get("motorLeft");
         motorRight = hardwareMap.dcMotor.get("motorRight");
 
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-//        motorLeft.setDirection(DcMotor.Direction.REVERSE);
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
-        //GO
-        WaitMillis(6000);
-        //waiting 10 seconds
-        DriveForward(0.75, InchesToTicks(60));
+        //GO!!!
+        WaitMillis(3000);
+        DriveForward(0.75, InchesToTicks(24));
+        TankRight(0.75, InchesToTicks(10));
+        DriveForward(0.75, InchesToTicks(2));
+        TankLeft(0.75, InchesToTicks(10));
+        DriveForward(0.75, InchesToTicks(36));
         telemetry.addData("Say", "I am done.");
-        telemetry.addData("Say", "This incredible program");
-        telemetry.addData("Say", "Joe is the Best");
         telemetry.update();
-
     }
 
 
@@ -98,7 +99,7 @@ public class TriBotAutoZeroten extends LinearOpMode {
     public void DriveBackwards(double power, int distance){
         DriveForward(-power,-distance);
     }
-   /* public void TankRight(double power, int distance){
+    public void TankRight(double power, int distance){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorLeft.setTargetPosition(distance);
@@ -112,8 +113,8 @@ public class TriBotAutoZeroten extends LinearOpMode {
         StopDriving();
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }*/
-   /* public void TankLeft(double power, int distance){
+    }
+    public void TankLeft(double power, int distance){
         TankRight(-power,-distance);
     }
     public void PivotRight(double power, int distance){
@@ -126,18 +127,18 @@ public class TriBotAutoZeroten extends LinearOpMode {
         }
         motorLeft.setPower(0);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }*/
-/*    public void PivotLeft(double power, int distance){
+    }
+    public void PivotLeft(double power, int distance){
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRight.setTargetPosition(distance);
         motorRight.setPower(1);
         while(opModeIsActive()&&motorRight.isBusy()){
             // wait for motor to reach position
-        }*/
-        /*motorRight.setPower(0);
+        }
+        motorRight.setPower(0);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }*/
+    }
     public void SetPower(double left, double right){
         motorLeft.setPower(left);
         motorRight.setPower(right);
@@ -145,7 +146,7 @@ public class TriBotAutoZeroten extends LinearOpMode {
     public void StopDriving(){
         SetPower(0,0);
     }
-   /* public void SetPowerEncoder(double leftPower, double rightPower, int leftTarget, int rightTarget){
+    public void SetPowerEncoder(double leftPower, double rightPower, int leftTarget, int rightTarget){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -163,12 +164,16 @@ public class TriBotAutoZeroten extends LinearOpMode {
                 motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
         }
-        StopDriving();*/
-       /* motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        StopDriving();
+        motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }*/
+    }
     public int InchesToTicks(double inches){
         int ticks = (int) Math.round(inches*ticksPerInch);
+        return ticks;
+    }
+    public int DegreesToTicks(double degrees){
+        int ticks = (int) Math.round(degrees*ticksPerDegrees);
         return ticks;
     }
 }

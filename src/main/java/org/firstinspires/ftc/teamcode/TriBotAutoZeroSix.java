@@ -36,9 +36,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="TriBotAuto00")
+@Autonomous(name="TriBotAuto06")
 
-public class TriBotAutoZeroZero extends LinearOpMode {
+public class TriBotAutoZeroSix extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     double motorRevTicks = 1440;
@@ -55,17 +55,19 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         motorRight = hardwareMap.dcMotor.get("motorRight");
 
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+//        motorLeft.setDirection(DcMotor.Direction.REVERSE);
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
-        //GO!!!
-        WaitMillis(0);
-        DriveForward(0.75, InchesToTicks(36));
+        //GO
+        WaitMillis(6000);
+        //waiting 10 seconds
+        DriveForward(0.75, InchesToTicks(60));
         telemetry.addData("Say", "I am done.");
         telemetry.update();
+
     }
 
 
@@ -95,7 +97,7 @@ public class TriBotAutoZeroZero extends LinearOpMode {
     public void DriveBackwards(double power, int distance){
         DriveForward(-power,-distance);
     }
-    public void TankRight(double power, int distance){
+   /* public void TankRight(double power, int distance){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorLeft.setTargetPosition(distance);
@@ -109,8 +111,8 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         StopDriving();
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    public void TankLeft(double power, int distance){
+    }*/
+   /* public void TankLeft(double power, int distance){
         TankRight(-power,-distance);
     }
     public void PivotRight(double power, int distance){
@@ -123,18 +125,18 @@ public class TriBotAutoZeroZero extends LinearOpMode {
         }
         motorLeft.setPower(0);
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-    public void PivotLeft(double power, int distance){
+    }*/
+/*    public void PivotLeft(double power, int distance){
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorRight.setTargetPosition(distance);
         motorRight.setPower(1);
         while(opModeIsActive()&&motorRight.isBusy()){
             // wait for motor to reach position
-        }
-        motorRight.setPower(0);
+        }*/
+        /*motorRight.setPower(0);
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
+    }*/
     public void SetPower(double left, double right){
         motorLeft.setPower(left);
         motorRight.setPower(right);
@@ -142,7 +144,7 @@ public class TriBotAutoZeroZero extends LinearOpMode {
     public void StopDriving(){
         SetPower(0,0);
     }
-    public void SetPowerEncoder(double leftPower, double rightPower, int leftTarget, int rightTarget){
+   /* public void SetPowerEncoder(double leftPower, double rightPower, int leftTarget, int rightTarget){
         motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -160,10 +162,10 @@ public class TriBotAutoZeroZero extends LinearOpMode {
                 motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             }
         }
-        StopDriving();
-        motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        StopDriving();*/
+       /* motorLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
+    }*/
     public int InchesToTicks(double inches){
         int ticks = (int) Math.round(inches*ticksPerInch);
         return ticks;
