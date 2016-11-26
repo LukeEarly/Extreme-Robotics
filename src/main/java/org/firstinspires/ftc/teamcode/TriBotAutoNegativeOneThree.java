@@ -65,7 +65,7 @@ public class TriBotAutoNegativeOneThree extends LinearOpMode {
         WaitMillis(3000);
         DriveForward(0.75, InchesToTicks(24));
         TankRight(0.75, InchesToTicks(10));
-        DriveForward(0.75, InchesToTicks(2));
+        DriveForward(0.75, InchesToTicks(24));
         TankLeft(0.75, InchesToTicks(10));
         DriveForward(0.75, InchesToTicks(36));
         telemetry.addData("Say", "I am done.");
