@@ -36,9 +36,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="TriBotAuto-13")
+@Autonomous(name="TriBotAuto+13")
 
-public class TriBotAutoNegativeOneThree extends LinearOpMode {
+public class TriBotAutoPositiveOneThree extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     double motorRevTicks = 1440;
@@ -57,15 +57,16 @@ public class TriBotAutoNegativeOneThree extends LinearOpMode {
         motorLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         motorRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         //GO!!
         WaitMillis(3000);
         DriveForward(0.75, InchesToTicks(20));
-        TankRight(0.75, InchesToTicks(10));
-        DriveForward(0.75, InchesToTicks(24));
         TankLeft(0.75, InchesToTicks(10));
+        DriveForward(0.75, InchesToTicks(24));
+        TankRight(0.75, InchesToTicks(10));
         DriveForward(0.75, InchesToTicks(40));
         telemetry.addData("Say", "I am done.");
         telemetry.update();
