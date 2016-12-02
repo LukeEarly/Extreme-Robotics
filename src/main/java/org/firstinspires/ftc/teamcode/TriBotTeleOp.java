@@ -45,25 +45,26 @@ public class TriBotTeleOp extends LinearOpMode {
                 int startPosition = motorSlapshot.getCurrentPosition();
                 telemetry.addData("Start P", startPosition);
                 telemetry.update();
-                motorSlapshot.setPower(-1);
-                while (motorSlapshot.getCurrentPosition() > startPosition + 280) {
+                motorSlapshot.setPower(1);
+                while (motorSlapshot.getCurrentPosition()<startPosition-280) {
                     // Waiting...
                     telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
                     telemetry.update();
                 }
-                motorSlapshot.setPower(0);            }
-            if (gamepad2.left_bumper) {
+                motorSlapshot.setPower(0);
+            } else if (gamepad2.left_bumper) {
                 motorSlapshot.setPower(0);
                 int startPositionr = motorSlapshot.getCurrentPosition();
                 telemetry.addData("Start P", startPositionr);
                 telemetry.update();
-                motorSlapshot.setPower(1);
-                while(motorSlapshot.getCurrentPosition()<startPositionr-280){
+                motorSlapshot.setPower(-1);
+                while(motorSlapshot.getCurrentPosition()>startPositionr+280){
                     // Waiting...
                     telemetry.addData("Current P", motorSlapshot.getCurrentPosition());
                     telemetry.update();
                 }
-                motorSlapshot.setPower(0);            }
+                motorSlapshot.setPower(0);
+            }
             motorLeft.setPower(left);
             motorRight.setPower(right);
             idle();

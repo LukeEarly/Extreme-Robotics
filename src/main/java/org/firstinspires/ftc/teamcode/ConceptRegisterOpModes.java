@@ -102,17 +102,20 @@ public class ConceptRegisterOpModes
     // manager.register("Telemetry",              ConceptTelemetry.class);
     // manager.register("Vuforia Navigation",     ConceptVuforiaNavigation.class);
 
-    // Things I Created
+    //  Things I Created
        manager.register("Tutorial_Autonomous",    Tutorial_Autonomous.class);
        manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
        manager.register("Encoder_Test",           Encoder_Test.class);
        manager.register("ODS_Test",               ODS_Test.class);
-      // TriBotTeleOp
+    //  TriBotTeleOp
        manager.register("TriBotTeleOp",           TriBotTeleOp.class);
-    // TriBotAuto
+    //  TriBotAuto
        manager.register("TriBotAuto00",           TriBotAutoZeroZero.class);
        manager.register("TriBotAuto06",           TriBotAutoZeroSix.class);
        manager.register("TriBotAuto-13",          TriBotAutoNegativeOneThree.class);
        manager.register("TriBotAuto+13",          TriBotAutoPositiveOneThree.class);
+       manager.register("TriBotAutoB06",          TriBotAutoBlueZeroSix.class);
+       manager.register("TriBotAutoB-16",         TriBotAutoBlueNegativeOneSix.class);
+       manager.register("TriBotAutoB+16",         TriBotAutoBluePositiveOneSix.class);
   }
 }
