@@ -71,7 +71,7 @@ public class ConceptRegisterOpModes
     // manager.register("Linear Opmode",          TemplateOpMode_Linear.class);
 
     // Driving Samples
-       manager.register("Teleop POV",             PushbotTeleopPOV_Linear.class);
+       //manager.register("Teleop POV",             PushbotTeleopPOV_Linear.class);
     // manager.register("Teleop Tank",            PushbotTeleopTank_Iterative.class);
     // manager.register("Auto Drive Gyro",        PushbotAutoDriveByGyro_Linear.class);
     // manager.register("Auto Drive Encoder",     PushbotAutoDriveByEncoder_Linear.class);
@@ -103,14 +103,14 @@ public class ConceptRegisterOpModes
     // manager.register("Vuforia Navigation",     ConceptVuforiaNavigation.class);
 
     //  Things I Created
-       manager.register("Tutorial_Autonomous",    Tutorial_Autonomous.class);
-       manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
-       manager.register("Encoder_Test",           Encoder_Test.class);
-       manager.register("ODS_Test",               ODS_Test.class);
+       //manager.register("Tutorial_Autonomous",    Tutorial_Autonomous.class);
+       //manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
+       //manager.register("Encoder_Test",           Encoder_Test.class);
+       //manager.register("ODS_Test",               ODS_Test.class);
     //  TriBotTeleOp
        manager.register("TriBotTeleOp",           TriBotTeleOp.class);
     //  TriBotAuto
-       manager.register("TriBotAuto00",           TriBotAutoZeroZero.class);
+       //manager.register("TriBotAuto00",           TriBotAutoZeroZero.class);
        manager.register("TriBotAuto06",           TriBotAutoZeroSix.class);
        manager.register("TriBotAuto-13",          TriBotAutoNegativeOneThree.class);
        manager.register("TriBotAuto+13",          TriBotAutoPositiveOneThree.class);
