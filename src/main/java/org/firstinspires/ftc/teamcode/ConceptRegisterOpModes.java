@@ -87,7 +87,7 @@ public class ConceptRegisterOpModes
     // manager.register("HT Color",               SensorHTColor.class);
     // manager.register("LEGO Light",             SensorLEGOLight.class);
     // manager.register("LEGO Touch",             SensorLEGOTouch.class);
-    // manager.register("MR Color",               SensorMRColor.class);
+       manager.register("MR Color",               TestSensorMRColor.class);
     // manager.register("MR Gyro",                SensorMRGyro.class);
     // manager.register("MR IR Seeker",           SensorMRIrSeeker.class);
     // manager.register("MR ODS",                 SensorMROpticalDistance.class);
