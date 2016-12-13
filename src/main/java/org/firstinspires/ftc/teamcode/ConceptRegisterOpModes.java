@@ -117,5 +117,6 @@ public class ConceptRegisterOpModes
        manager.register("TriBotAutoB06",          TriBotAutoBlueZeroSix.class);
        manager.register("TriBotAutoB-16",         TriBotAutoBlueNegativeOneSix.class);
        manager.register("TriBotAutoB+16",         TriBotAutoBluePositiveOneSix.class);
+       manager.register("TriBotAutoRCBeacon00",   TriBotAutoCornerBeaconBlueZeroZero.class);
   }
 }
