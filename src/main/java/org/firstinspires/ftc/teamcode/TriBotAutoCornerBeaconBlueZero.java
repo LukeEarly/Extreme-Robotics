@@ -41,9 +41,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name="TriBotAutoRCBeacon00")
+@Autonomous(name="TriBotAutoBCBeacon0")
 
-public class TriBotAutoCornerBeaconBlueZeroZero extends LinearOpMode {
+public class TriBotAutoCornerBeaconBlueZero extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
     ColorSensor colorSensor;
@@ -78,24 +78,37 @@ public class TriBotAutoCornerBeaconBlueZeroZero extends LinearOpMode {
         DriveBackwards(0.75, InchesToTicks(45));
         PivotRight(0.75, InchesToTicks(-12));
         Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
-        while(colorSensor.blue()<1&&colorSensor.red()<1){
-            SetPower(0.5, 0.5);
+        while(colorSensor.blue()<1.5&&colorSensor.red()<1.5){
+            Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
+            SetPower(-0.5, -0.5);
         }
         SetPower(0,0);
         Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
-        if(colorSensor.red()>colorSensor.blue()){
+        if(colorSensor.red()<colorSensor.blue()&&colorSensor.red()>1){
             DriveBackwards(0.5, InchesToTicks(10));
-            TankRight(0.5, InchesToTicks(inchesPerRightTurn/2));
-        }else if(colorSensor.red()>colorSensor.blue()){
+            TankLeft(0.5, InchesToTicks(inchesPerRightTurn/2));
+        }else if(colorSensor.red()>colorSensor.blue()|colorSensor.red()+colorSensor.blue()<2){
             DriveBackwards(0.5, InchesToTicks(6));
             Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
-            if(colorSensor.red()>colorSensor.blue()){
+            telemetry.addData("Clear", colorSensor.alpha());
+            telemetry.addData("Red  ", colorSensor.red());
+            telemetry.addData("Green", colorSensor.green());
+            telemetry.addData("Blue ", colorSensor.blue());
+            telemetry.addData("Hue", hsvValues[0]);
+            telemetry.update();
+            if(colorSensor.red()<colorSensor.blue()&&colorSensor.blue()>1){
+                telemetry.addData("Button","2");
                 DriveBackwards(0.5, InchesToTicks(10));
-                TankRight(0.5, InchesToTicks(inchesPerRightTurn/2));
+                telemetry.addData("Task","Back");
+                TankLeft(0.5, InchesToTicks(inchesPerRightTurn/2));
+                telemetry.addData("Task","Tank");
             }else{
-                telemetry.addData("Debug:", "I am not pressing either button! WHY???");
+                telemetry.addData("Debug:", "Neither beacons are blue!");
             }
+        }else {
+            telemetry.addData("Debug:", "Neither beacons are anything!");
         }
+        WaitMillis(10000);
         telemetry.addData("Say", "I am done.");
         telemetry.update();
     }
