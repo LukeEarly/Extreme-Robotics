@@ -86,8 +86,8 @@ public class ConceptRegisterOpModes
     // manager.register("DIM DIO",                SensorDIO.class);
     // manager.register("HT Color",               SensorHTColor.class);
     // manager.register("LEGO Light",             SensorLEGOLight.class);
-    // manager.register("LEGO Touch",             SensorLEGOTouch.class);
-       manager.register("MR Color",               TestSensorMRColor.class);
+    // manager.register("LEGO Touch",             SensorLEGOTouch.class)
+       // manager.register("MR Color",               TestSensorMRColor.class);
     // manager.register("MR Gyro",                SensorMRGyro.class);
     // manager.register("MR IR Seeker",           SensorMRIrSeeker.class);
     // manager.register("MR ODS",                 SensorMROpticalDistance.class);
@@ -107,16 +107,17 @@ public class ConceptRegisterOpModes
        //manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
        //manager.register("Encoder_Test",           Encoder_Test.class);
        //manager.register("ODS_Test",               ODS_Test.class);
+       manager.register("AttachMotorTest", AttachmentMotorTest.class);
     //  TriBotTeleOp
-       manager.register("TriBotTeleOp",           TriBotTeleOp.class);
+       //manager.register("TriBotTeleOp",           TriBotTeleOp.class);
     //  TriBotAuto
        //manager.register("TriBotAuto00",           TriBotAutoZeroZero.class);
-       manager.register("TriBotAuto06",           TriBotAutoZeroSix.class);
-       manager.register("TriBotAuto-13",          TriBotAutoNegativeOneThree.class);
-       manager.register("TriBotAuto+13",          TriBotAutoPositiveOneThree.class);
-       manager.register("TriBotAutoB06",          TriBotAutoBlueZeroSix.class);
-       manager.register("TriBotAutoB-16",         TriBotAutoBlueNegativeOneSix.class);
-       manager.register("TriBotAutoB+16",         TriBotAutoBluePositiveOneSix.class);
-       manager.register("TriBotAutoBCBeacon0",   TriBotAutoCornerBeaconBlueZero.class);
+       //manager.register("TriBotAuto06",           TriBotAutoZeroSix.class);
+       //manager.register("TriBotAuto-13",          TriBotAutoNegativeOneThree.class);
+       //manager.register("TriBotAuto+13",          TriBotAutoPositiveOneThree.class);
+       //manager.register("TriBotAutoB06",          TriBotAutoBlueZeroSix.class);
+       //manager.register("TriBotAutoB-16",         TriBotAutoBlueNegativeOneSix.class);
+       //manager.register("TriBotAutoB+16",         TriBotAutoBluePositiveOneSix.class);
+       //manager.register("TriBotAutoBCBeacon0",   TriBotAutoCornerBeaconBlueZero.class);
   }
 }
