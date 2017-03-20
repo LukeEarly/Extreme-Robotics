@@ -41,11 +41,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TriBotAutoBluePositiveOneSix extends LinearOpMode {
     DcMotor motorLeft;
     DcMotor motorRight;
-    double motorRevTicks = 1440;
+    double motorRevolutionTicks = 1440;
     double gearRatio = 0.5;
     double wheelDiameterIn = 12.56637061459172;
     double wheelDiameterCm = 31.91858136106297;
-    double wheelRevTicks = motorRevTicks/gearRatio;
+    double wheelRevTicks = motorRevolutionTicks/gearRatio;
     double ticksPerInch = 229.18311804808813395;
     double ticksPerCm = 90.22957403468036431;
     double ticksPerDegrees = 0;

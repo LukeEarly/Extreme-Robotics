@@ -33,6 +33,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
 /**
  * This class demonstrates how to manually register opmodes.
@@ -93,7 +94,7 @@ public class ConceptRegisterOpModes
     // manager.register("MR ODS",                 SensorMROpticalDistance.class);
 
     //  Concept Samples
-    // manager.register("Null Op",                ConceptNullOp.class);
+    // manager.register("Null Op",                ConceptNullOp.class);2
     // manager.register("Compass Calibration",    ConceptCompassCalibration.class);
     // manager.register("DIM as Indicator",       ConceptDIMAsIndicator.class);
     // manager.register("I2C Address Change",     ConceptI2cAddressChange.class);
@@ -107,7 +108,8 @@ public class ConceptRegisterOpModes
        //manager.register("AutonomousTestSlapshot", AutonomousTestSlapshot.class);
        //manager.register("Encoder_Test",           Encoder_Test.class);
        //manager.register("ODS_Test",               ODS_Test.class);
-       manager.register("AttachMotorTest", AttachmentMotorTest.class);
+       //manager.register("AttachMotorTest",          AttachmentMotorTest.class);
+       //manager.register("ServoTest",                Servo_Test.class);
     //  TriBotTeleOp
        //manager.register("TriBotTeleOp",           TriBotTeleOp.class);
     //  TriBotAuto
@@ -118,6 +120,15 @@ public class ConceptRegisterOpModes
        //manager.register("TriBotAutoB06",          TriBotAutoBlueZeroSix.class);
        //manager.register("TriBotAutoB-16",         TriBotAutoBlueNegativeOneSix.class);
        //manager.register("TriBotAutoB+16",         TriBotAutoBluePositiveOneSix.class);
-       //manager.register("TriBotAutoBCBeacon0",   TriBotAutoCornerBeaconBlueZero.class);
+       //manager.register("TriBotAutoBCBeacon0",    TriBotAutoCornerBeaconBlueZero.class);
+    //  THE TRIBOT IS DEAD
+    //  UXOAuto
+      manager.register("TestUXO",                      UXObotTest.class);
+      manager.register("RedShootUXO",                  UXObotAutoShootRed.class);
+      manager.register("BlueShootUXO",                 UXObotAutoShootBlue.class);
+      manager.register("RedShoot12UXO",                UXObotAutoShootRedTwelve.class);
+      manager.register("BlueShootCenter12UXO",         UXObotAutoShootBlueCenterTwelve.class);
+    //  UXOTeleop
+      manager.register("TeleopUXO",                    UXObotTeleop.class);
   }
 }

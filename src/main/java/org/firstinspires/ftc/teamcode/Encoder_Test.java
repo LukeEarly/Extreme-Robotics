@@ -65,7 +65,7 @@ public class Encoder_Test extends LinearOpMode {
     double wheelDiameterIn = 12.56637061459172;
     double wheelDiameterCm = 31.91858136106297;
     double wheelRevTicks = motorRevTicks/gearRatio;
-    double ticksPerInch = 229.18311804808813395;
+    double ticksPerInch = 6;
     double ticksPerCm = 90.22957403468036431;
     //double wheelRpm = 0;
     //long inchesPerMinute = 0;
